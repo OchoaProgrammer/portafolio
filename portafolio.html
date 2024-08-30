@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Marlon Ochoa</title>
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#09f">
+    <meta name="description" content="Portafolio de Marlon Ochoa Tecnólogo desarrollador">
+    <link rel="icon" type="images/yo.png" href="/images/yo.png">
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div>
+                <h3><span>M</span>arlon</h3>
+            </div>
+            <ul class="menu">
+                <li><a href="#Home">Inicio</a></li>
+                <li><a href="#Me">Sobre Mi</a></li>
+                <li><a href="#Experiencia">Experiencia</a></li>
+                <li><a href="#Habilidades Técnicas">Habilidades Técnicas</a></li>
+                <li><a href="#Contacto">Contacto</a></li>
+            </ul>
+            <button id="theme-toggle">Cambiar Tema</button>
+        </nav>
+    </header>
+    <div class="principal">
+        <main>
+            <div>
+                <h5>Desarrollador web</h5>
+                <h1 id="Home">Hola Soy <span>Marlon</span> Ochoa</h1>
+                <h3 class="frase">"El código es como el humor; si tienes que explicarlo, no es bueno"</h3>
+                <a download href="#"><button class="download-cv">Descargar CV</button></a>
+                <div class="redes">
+                    <a class="redes" href="https://github.com/OchoaProgrammer" target="_blank"><i class="fab fa-github"></i></a>
+                    <a class="redes" href="https://www.instagram.com/ochoa_m26/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a class="redes" href="https://www.facebook.com/ElMarlon26" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a class="redes" href="https://wa.me/573023667997" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <img class="img2" src="/images/me.png" alt="Marlon ochoa con su actitud positiva y su vibra cálida">
+        </main>
+    </div>
+
+    <div class="commits-card">
+        <div class="card-content">
+            <p id="commits-count">Cargando conteo de commits...</p>
+        </div>
+    </div>
+
+    <div class="commits-card">
+        <div class="card-content">
+            <p id="repos-count">Cargando número de proyectos...</p>
+        </div>
+    </div>
+
+    <div class="commits-card">
+        <div class="card-content">
+            <p id="visits-count">Cargando visitas totales...</p>
+        </div>
+    </div>
+    
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+        });
+
+        async function fetchCommitAndRepoCount() {
+            try {
+                const reposResponse = await fetch('https://api.github.com/users/OchoaProgrammer/repos');
+                if (!reposResponse.ok) throw new Error('Error al obtener repositorios');
+                const repos = await reposResponse.json();
+
+                let totalCommits = 0;
+                const repoCount = repos.length;
+
+                const commitsPromises = repos.map(repo => 
+                    fetch(`https://api.github.com/repos/OchoaProgrammer/${repo.name}/commits`)
+                        .then(response => response.json())
+                        .then(commits => totalCommits += commits.length)
+                );
+
+                await Promise.all(commitsPromises);
+                
+                displayCommitAndRepoCount(repoCount, totalCommits);
+            } catch (error) {
+                console.error('Error al obtener datos:', error);
+                document.getElementById('commits-count').textContent = 'Error al cargar el conteo de commits.';
+                document.getElementById('repos-count').textContent = 'Error al cargar el número de proyectos.';
+            }
+        }
+
+        async function fetchVisitCount() {
+            try {
+                const response = await fetch('https://api.example.com/total-visits'); // Reemplaza con tu URL real
+                if (!response.ok) throw new Error('Error al obtener el conteo de visitas');
+                const data = await response.json();
+
+                displayVisitCount(data.totalVisits); // Asegúrate de que el JSON devuelto tenga el campo `totalVisits`
+            } catch (error) {
+                console.error('Error al obtener el conteo de visitas:', error);
+                document.getElementById('visits-count').textContent = 'Error al cargar el conteo de visitas.';
+            }
+        }
+
+        function displayCommitAndRepoCount(repoCount, commitCount) {
+            const commitsCountElement = document.getElementById('commits-count');
+            const reposCountElement = document.getElementById('repos-count');
+
+            commitsCountElement.textContent = `Total de Commits: ${commitCount}`;
+            reposCountElement.textContent = `Total de Proyectos: ${repoCount}`;
+        }
+
+        function displayVisitCount(visitCount) {
+            const visitsCountElement = document.getElementById('visits-count');
+            visitsCountElement.textContent = `Visitas Totales: ${visitCount}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchCommitAndRepoCount();
+            fetchVisitCount();
+        });
+    </script>
+</body>
+<footer></footer>
+</html>

@@ -1,0 +1,362 @@
+/* Reseteo y configuración básica */
+* {
+    padding: 0;
+    margin: 0;  
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Variables CSS para el modo oscuro */
+:root {
+    --background-color: linear-gradient(to right, #040429, #282c34);
+    --text-color: white;
+    --nav-background-color: #001f3f;
+    --link-color: white;
+    --link-hover-color: #001f3f;
+    --link-hover-background: white;
+    --button-background-color: rgb(51, 22, 214);
+    --button-hover-background-color:#1a6cbe;
+    --button-hover-text-color: rgb(255, 255, 255);
+    --button-shadow-color: rgba(0, 0, 0, 0.495);
+    --button-hover-shadow-color: rgb(0, 4, 248);
+    --toggle-button-background: white;
+    --toggle-button-color: black;
+    --icon-color: #ffffff;
+    --icon-hover-color: #4078c0;
+    --h3-color: white;
+}
+
+/* Variables CSS para el modo claro */
+body.light-mode {
+    --background-color: #f0f0f0;
+    --text-color: #000;
+    --nav-background-color: rgba(0, 0, 0, 0.144);
+    --link-color: #000;
+    --link-hover-color: #fff;
+    --link-hover-background: #000;
+    --button-background-color: #007bff;
+    --button-hover-background-color: #0056b3;
+    --button-hover-text-color: #fff;
+    --button-shadow-color: rgba(0, 123, 255, 0.5);
+    --button-hover-shadow-color: rgba(0, 86, 179, 0.5);
+    --toggle-button-background: black;
+    --toggle-button-color: white;
+    --icon-color: #000;
+    --icon-hover-color: #4078c0;
+    --h3-color: black; 
+}
+
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    position: relative;
+    margin: 0; /* Eliminar el margen general */
+    max-width: 1200px; /* Limitar el ancho máximo */
+    margin: 0 auto; /* Centrar el contenido horizontalmente */
+}
+
+.principal {
+    font-size: 20px;
+    padding: 20px; /* Ajustar el padding según sea necesario */
+}
+
+
+
+header {
+    background-color: var(--nav-background-color);
+    padding: 1em 2em;
+    position: fixed;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.menu a {
+    color: var(--link-color);
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.menu li {
+    list-style: none;
+}
+
+.menu a:hover {
+    color: var(--link-hover-color);
+    background-color: var(--link-hover-background);
+    border-radius: 6px;
+}
+
+span {
+    color: rgb(25, 0, 255);
+}
+
+main {
+    width: 80vw;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    padding-top: 100px; 
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+h3 {
+    margin-bottom: 1em;
+}
+
+.download-cv {
+    padding: 10px 20px;
+    background-color: var(--button-background-color);
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: var(--button-hover-text-color);
+    box-shadow: 6px 5px 20px -2px var(--button-shadow-color);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.download-cv:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-hover-text-color);
+    box-shadow: 5px 5px 20px -2px var(--button-hover-shadow-color);
+}
+
+.img2 {
+    width: 30%;
+    border-radius: 10%; /* Hace la imagen redonda */
+    overflow: flex; /* Oculta cualquier contenido que desborde */
+    border: 1px solid rgba(255, 255, 255, 0.8); /* Añade un borde */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones para la animación */
+    animation: glow 2s ease-in-out infinite alternate; /* Animaciones de giro y brillo */
+    margin-left: 10%; /* Ajusta este valor según sea necesario */
+    position: relative; /* Necesario para la animación */
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px #001aff;
+    }
+    50% {
+        box-shadow: 0 0 20px rgb(255, 255, 255);
+    }
+    100% {
+        box-shadow: 0 0 10px #00f7ff;
+    }
+}
+
+.img2:hover {
+    transform: scale(1.2); /* Aumenta el tamaño de la imagen en el hover */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Aumenta la sombra en el hover */
+    animation-play-state: paused; /* Pausa las animaciones en el hover */
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        padding-top: 150px; /* Ajusta el padding según la altura de la nav */
+    }
+
+    .img {
+        width: 100%;
+    }
+
+    .img2 {
+        width: 100%;
+        padding: 50px;
+    }
+
+    .me {
+        grid-template-columns: 1fr;
+        padding-right: 0;
+    }
+}
+
+
+
+/* Animaciones */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        color: rgb(26, 19, 122);
+    }
+    100% {
+        color: #ffffff; 
+    }
+}
+
+@keyframes textShadow {
+    0% {
+        text-shadow: none;
+    }
+    100% {
+        text-shadow: 5px 15px 15px rgba(0, 4, 255, 0.8); 
+    }
+}
+
+#Home {
+    animation: slideIn 2s ease-out forwards, fadeIn 2s ease-out forwards;
+}
+
+#Home:hover h1, #Home:hover span {
+    animation: colorChange 0.5s ease-in-out forwards, textShadow 0.5s ease-in-out forwards;
+    animation-fill-mode: forwards; /* Mantiene el estado final */
+}
+
+#theme-toggle {
+    padding: 10px 20px;
+    background: var(--toggle-button-background);
+    color: var(--toggle-button-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px; /* Tamaño de fuente del botón */
+    position: relative; /* Necesario para la sombra animada */
+    overflow: hidden; /* Oculta el contenido que se desborda */
+}
+
+#theme-toggle:hover {
+    background: var(--toggle-button-hover-background);
+}
+
+#theme-toggle:active {
+    transform: scale(0.95); /* Simula un efecto de presión al hacer clic */
+}
+
+#theme-toggle span {
+    position: relative;
+    z-index: 1; /* Asegura que el texto esté sobre el pseudo-elemento */
+}
+
+#theme-toggle::before {
+    background: rgba(255, 255, 255, 0);
+    transition: width 0.4s ease, height 0.4s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0; 
+}
+
+#theme-toggle:hover::before {
+    width: 0;
+    height: 0;
+}
+
+#theme-toggle:hover {
+    box-shadow: 5px 15px 15px 1px rgba(0, 0, 0, 0.637); /* Sombra del botón al pasar el ratón */
+    color: #1900ff; /* Color del texto al pasar el ratón */
+}
+
+.about-me {
+    background-color: #00f7ff;
+}
+
+
+.redes {
+    display: inline-block;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+/* Estilos para los iconos de redes sociales */
+.redes i {
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: var(--button-background-color);
+    color: var(--button-hover-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 6px 5px 20px -2px var(--button-shadow-color);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.redes i:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-hover-text-color);
+    box-shadow: 5px 5px 20px -2px var(--button-hover-shadow-color);
+}
+
+/* Estilo básico para la tarjeta */
+.commits-card {
+    
+    display: inline-block;
+    max-width: 300px;
+    margin: 20px ;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 7px 10px rgba(255, 255, 255, 0.788);
+   
+    text-align: center;
+}
+
+.card-content {
+    font-size: 1.2em;
+    color: #ffffff;
+}
+
+/* Ajustes para modo claro y oscuro */
+body.light-mode .commits-card {
+    background-color: #333;
+    color: #fff;
+}
+
+body.light-mode .card-content {
+    color: #ddd;
+}
+
+h5{
+    color: gray;
+}
+
+
